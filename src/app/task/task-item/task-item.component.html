@@ -1,0 +1,12 @@
+<div>
+    <span>{{task.name}}-------</span>
+    <span>{{task.duration}}------</span>
+    <span>
+        <button (click)="Delete(task.id)">Delete</button>
+        <a routerLink="/task/{{task.id}}">
+            <button>Detail</button>
+        </a>
+
+    </span>
+
+</div>

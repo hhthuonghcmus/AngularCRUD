@@ -1,11 +1,15 @@
 <p>This is the task detail</p>
-<div>
+
+<form (ngSubmit)="Save()" [formGroup]="taskEditForm" #form="ngForm">
+    <label for="name">Name: </label>
+    <input type="text" placeholder="Enter task name" formControlName="name">
+    <br/>
     <div>
-        <label for="name">Task name:</label>
-        <span>{{task?.name}}</span>
+        <label for="duration">Duration: </label>
+        <input type="text" placeholder="Enter duration" formControlName="duration">
     </div>
-    <div>
-        <label for="duration">Duration:</label>
-        <span>{{task?.duration}}</span>
-    </div>
-</div>
+    <button style="background-color: blue;">Save</button>
+</form>
+<a routerLink="/task">
+    <button style="background-color: blue;">Back</button>
+</a>

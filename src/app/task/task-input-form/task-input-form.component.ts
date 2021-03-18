@@ -19,7 +19,7 @@ export class TaskInputFormComponent implements OnInit {
 
     }
 
-    OnSubmit(): void{
+    Submit(): void{
         this.taskService.AddNewTask(this.taskInputForm);
         this.taskInputForm = new FormGroup({
             name: new FormControl(""),

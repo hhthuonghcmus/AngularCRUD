@@ -1,4 +1,4 @@
-<form (ngSubmit)="OnSubmit()" [formGroup]="taskInputForm" #form="ngForm">
+<form (ngSubmit)="Submit()" [formGroup]="taskInputForm" #form="ngForm">
     <label for="name">Name: </label>
     <input type="text" placeholder="Enter task name" formControlName="name">
     <br/>

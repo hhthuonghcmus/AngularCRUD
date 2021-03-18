@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Task } from '../model/TaskModel';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -41,5 +42,11 @@ export class TaskService {
 
   public GetDetail(id: string): Task | undefined {
     return this.tasks.find((t) => t.id == id);
+  }
+
+  Save(task: FormGroup): void{
+    const index = this.tasks.findIndex((t) => t.id == task['value']['id']);
+    this.tasks[index].name = task['value']['name'];
+    this.tasks[index].duration = task['value']['duration'];
   }
 }

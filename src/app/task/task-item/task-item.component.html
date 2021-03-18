@@ -2,9 +2,9 @@
     <span>{{task.name}}-------</span>
     <span>{{task.duration}}------</span>
     <span>
-        <button (click)="Delete(task.id)">Delete</button>
+        <button (click)="Delete(task.id)" style="background-color: blue;">Delete</button>
         <a routerLink="/task/{{task.id}}">
-            <button>Detail</button>
+           <button style="background-color: blue;">Detail/Edit</button> 
         </a>
 
     </span>

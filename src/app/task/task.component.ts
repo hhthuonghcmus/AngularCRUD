@@ -21,7 +21,6 @@ export class TaskComponent implements OnInit {
 
     ngOnInit(): void {
       this.taskList = this.taskService.GetTaskList();
-      console.log(this.taskList);
     }
 
     OnSubmit(): void{

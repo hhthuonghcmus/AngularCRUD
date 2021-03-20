@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {  Validators, FormBuilder, FormGroup, FormControl }  from '@angular/forms';
-import {  FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { TaskService } from './task.service';
 import { Task } from './../model/TaskModel';
 
@@ -10,25 +8,19 @@ import { Task } from './../model/TaskModel';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-    taskList: Task[] = [];
-    taskInputForm = new FormGroup({
-        name: new FormControl(""),
-        duration: new FormControl("")
-    })
+  tasks: Task[] = [];
 
+  /**
+   * Constructor
+   */
+  constructor(private taskService: TaskService) { }
 
-    constructor(private taskService: TaskService) { }
-
-    ngOnInit(): void {
-      this.taskList = this.taskService.GetTaskList();
-    }
-
-    OnSubmit(): void{
-        this.taskService.AddNewTask(this.taskInputForm);
-      //   this.taskInputForm = new FormGroup({
-      //     name: new FormControl(""),
-      //     duration: new FormControl("")
-      // })
-    
-    }
+  /**
+   * Overrides on init
+   *
+   * @return {void}
+   */
+  ngOnInit(): void {
+    this.tasks = this.taskService.getAll();
+  }
 }

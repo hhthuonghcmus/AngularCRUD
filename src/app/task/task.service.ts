@@ -1,52 +1,65 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Task } from '../model/TaskModel';
 
+import { Task } from '../model/TaskModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  public tasks: Task[] = [
+  tasks: Task[] = [
     { id: '1', name: 'Go', duration: 1 },
     { id: '2', name: 'Went', duration: 2 },
     { id: '3', name: 'Gone', duration: 3 },
   ];
-  constructor() {}
 
-  public GetTaskList(): Task[] {
+  /**
+   * Get all tasks
+   *
+   * @return {Task[]} The tasks list
+   */
+  getAll(): Task[] {
     return this.tasks;
   }
 
-  public AddNewTask(taskInputForm: FormGroup) {
-    let newTask: Task = {
-      id: Math.random()
-        .toString(36)
-        .replace(/[^a-z]+/g, '')
-        .substr(0, 5),
-      name: taskInputForm['value']['name'],
-      duration: taskInputForm['value']['duration'],
-    };
-    this.tasks.push(newTask);
+  /**
+   * Get task by id
+   *
+   * @param  {string} id  The task id
+   * @return {Task}       The found task
+   */
+  get(id: string): Task | undefined {
+    return this.tasks.find((t) => t.id === id);
   }
 
-  // public Delete(id: string): Task[] {
-  //   this.tasks = this.tasks.filter((x) => x.id !== id);
-  //   return this.tasks;
-  // }
-
-  public Delete(id: string): void {
-    const index = this.tasks.findIndex((t) => t.id == id);
-    this.tasks.splice(index, 1);
+  /**
+   * Add new task
+   *
+   * @param  {Task} task  The task info
+   * @return {void}
+   */
+  create(task: Task): void {
+    this.tasks = [...this.tasks, task];
   }
 
-  public GetDetail(id: string): Task | undefined {
-    return this.tasks.find((t) => t.id == id);
+  /**
+   * Save a task
+   *
+   * @param  {Task} task  The task
+   * @return {void}
+   */
+  update(task: Task): void {
+    const index = this.tasks.findIndex((t) => t.id === t.id);
+
+    this.tasks[index] = task;
   }
 
-  Save(task: FormGroup): void{
-    const index = this.tasks.findIndex((t) => t.id == task['value']['id']);
-    this.tasks[index].name = task['value']['name'];
-    this.tasks[index].duration = task['value']['duration'];
+  /**
+ * Delete a task
+ *
+ * @param  {string} id  The task id
+ * @return {void}
+ */
+  delete(id: string): void {
+    this.tasks = this.tasks.filter(x => x.id !== id);
   }
 }

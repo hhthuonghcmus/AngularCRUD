@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TaskService } from './../task.service';
-import { Task } from './../../model/TaskModel';
 import { FormControl, FormGroup } from '@angular/forms';
+
+import { TaskService } from './../task.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -10,28 +10,42 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./task-detail.component.css']
 })
 export class TaskDetailComponent implements OnInit {
-
-  taskEditForm = new FormGroup({
+  form = new FormGroup({
     id: new FormControl(""),
     name: new FormControl(""),
     duration: new FormControl("")
   })
 
+  /**
+   * Constructor
+   */
   constructor(private router: ActivatedRoute, private taskService: TaskService) { }
 
+  /**
+   * Prepare form when component init
+   *
+   * @return {void}
+   */
   ngOnInit(): void {
     const id: string = this.router.snapshot.params["id"];
-    const task = this.taskService.GetDetail(id);
-    this.taskEditForm.setValue({
-      id: id,
+    const task = this.taskService.get(id);
+
+    this.form.setValue({
+      id,
       name: String(task?.name),
       duration: Number(task?.duration)
     })
-    
   }
 
-  Save(){
-    this.taskService.Save(this.taskEditForm);
-    alert("Save successfully");
+  /**
+   * Save task
+   *
+   * @return {void}
+   */
+  save(): void {
+    console.log('this.form.value', this.form.value)
+
+    this.taskService.update(this.form.value);
+    alert("Saved successfully");
   }
 }

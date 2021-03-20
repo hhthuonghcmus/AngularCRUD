@@ -1,15 +1,29 @@
 <p>This is the task detail</p>
 
-<form (ngSubmit)="Save()" [formGroup]="taskEditForm" #form="ngForm">
+<form (ngSubmit)="save()" [formGroup]="form">
+  <!-- Name -->
+  <div>
     <label for="name">Name: </label>
-    <input type="text" placeholder="Enter task name" formControlName="name">
-    <br/>
-    <div>
-        <label for="duration">Duration: </label>
-        <input type="text" placeholder="Enter duration" formControlName="duration">
-    </div>
-    <button style="background-color: blue;">Save</button>
+    <input type="text" placeholder="Enter task name" formControlName="name" />
+  </div>
+
+  <br />
+
+  <!-- Duration -->
+  <div>
+    <label for="duration">Duration: </label>
+    <input
+      type="text"
+      placeholder="Enter duration"
+      formControlName="duration"
+    />
+  </div>
+
+  <!-- Save -->
+  <button style="background-color: blue">Save</button>
 </form>
+
+<!-- Back -->
 <a routerLink="/task">
-    <button style="background-color: blue;">Back</button>
+  <button style="background-color: yellow">Back</button>
 </a>

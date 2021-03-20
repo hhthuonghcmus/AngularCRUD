@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {  Validators, FormBuilder, FormGroup, FormControl }  from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { TaskService } from '../task.service';
 
 @Component({
@@ -7,27 +7,25 @@ import { TaskService } from '../task.service';
   templateUrl: './task-input-form.component.html',
   styleUrls: ['./task-input-form.component.css']
 })
-export class TaskInputFormComponent implements OnInit {
-    taskInputForm = new FormGroup({
-      name: new FormControl(""),
-      duration: new FormControl("")
-    })
+export class TaskInputFormComponent {
+  form = new FormGroup({
+    name: new FormControl(""),
+    duration: new FormControl("")
+  })
 
-    constructor(private taskService: TaskService) { }
+  /**
+   * Constructor
+   */
+  constructor(private taskService: TaskService) { }
 
-    ngOnInit(): void {
-
-    }
-
-    Submit(): void{
-        this.taskService.AddNewTask(this.taskInputForm);
-        this.taskInputForm = new FormGroup({
-            name: new FormControl(""),
-            duration: new FormControl("")
-        })
-    }
-
+  /**
+   * Submit form to create new task
+   *
+   * @return {void}
+   */
+  save(): void {
+    console.log('this.taskInputForm.value', this.form.value)
+    this.taskService.create(this.form.value);
+    this.form.reset()
+  }
 }
-
-
-

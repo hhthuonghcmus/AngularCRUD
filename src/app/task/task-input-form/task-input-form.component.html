@@ -1,10 +1,18 @@
-<form (ngSubmit)="Submit()" [formGroup]="taskInputForm" #form="ngForm">
+<form (ngSubmit)="save()" [formGroup]="form">
+  <!-- Name -->
+  <div>
     <label for="name">Name: </label>
-    <input type="text" placeholder="Enter task name" formControlName="name">
-    <br/>
-    <div>
-        <label for="duration">Duration: </label>
-        <input type="text" placeholder="Enter duration" formControlName="duration">
-    </div>
-    <button>Add</button>
+    <input type="text" placeholder="Enter task name" formControlName="name" />
+  </div>
+
+  <br />
+
+  <!-- Duration -->
+  <div>
+    <label for="duration">Duration: </label>
+    <input type="text" placeholder="Enter duration" formControlName="duration" />
+  </div>
+
+  <!-- Add -->
+  <button>Add</button>
 </form>

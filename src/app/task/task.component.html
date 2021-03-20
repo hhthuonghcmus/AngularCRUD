@@ -1,5 +1,5 @@
-<app-task-input-form></app-task-input-form>
+<app-task-input-form (updateView)="UpdateView()"></app-task-input-form>
 
 <div *ngFor="let task of taskList">
-    <app-task-item [task]="task"></app-task-item>
+    <app-task-item [task]="task" (updateView)="UpdateView()"></app-task-item>
 </div>

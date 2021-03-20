@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from './../task.service';
 import { Task } from './../../model/TaskModel';
@@ -10,7 +10,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./task-detail.component.css']
 })
 export class TaskDetailComponent implements OnInit {
-
   taskEditForm = new FormGroup({
     id: new FormControl(""),
     name: new FormControl(""),
@@ -21,7 +20,7 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string = this.router.snapshot.params["id"];
-    const task = this.taskService.GetDetail(id);
+    const task = this.taskService.GetTaskById(id);
     this.taskEditForm.setValue({
       id: id,
       name: String(task?.name),
@@ -32,6 +31,7 @@ export class TaskDetailComponent implements OnInit {
 
   Save(){
     this.taskService.Save(this.taskEditForm);
+    this.taskService.updateViewSubject.next();
     alert("Save successfully");
   }
 }

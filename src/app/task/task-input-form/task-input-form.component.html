@@ -1,0 +1,10 @@
+<form (ngSubmit)="Submit()" [formGroup]="taskInputForm" #form="ngForm">
+    <label for="name">Name: </label>
+    <input type="text" placeholder="Enter task name" formControlName="name">
+    <br/>
+    <div>
+        <label for="duration">Duration: </label>
+        <input type="text" placeholder="Enter duration" formControlName="duration">
+    </div>
+    <button>Add</button>
+</form>
